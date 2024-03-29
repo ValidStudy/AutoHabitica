@@ -11,7 +11,7 @@ namespace BootHelper
                 "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             registryKey.SetValue("AutoHabitica", "\""
                 + AppDomain.CurrentDomain.SetupInformation.ApplicationBase
-                + "\\AutoHabitica.exe\" login");
+                + "AutoHabitica.exe\" login");
 
             registryKey.Close();
             Console.WriteLine("Added.");

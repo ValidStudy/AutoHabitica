@@ -16,10 +16,11 @@
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             bool isLogin = false;
-            if (args[0] =="login")
-            {
-                isLogin = true;
-            }
+            if (args.Length > 0)
+                if (args[0] == "login")
+                {
+                    isLogin = true;
+                }
             Application.Run(new MainWindow(isLogin));
         }
     }
