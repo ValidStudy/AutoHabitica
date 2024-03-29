@@ -1,8 +1,7 @@
 {
   "profiles": {
     "AutoHabitica": {
-      "commandName": "Project",
-      "commandLineArgs": "login"
+      "commandName": "Project"
     }
   }
 }
