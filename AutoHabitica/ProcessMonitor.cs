@@ -4,11 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace AutoHabitica
 {
     internal static class ProcessMonitor
     {
+        /// <summary>
+        /// Get the foreground window. From User32.dll.
+        /// </summary>
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
         /// <summary>
         /// Called every 5 seconds.
         /// </summary>
@@ -23,11 +29,24 @@ namespace AutoHabitica
                     Process[] processes = Process.GetProcessesByName(task.ProcessName);
                     if (processes.Length > 0)
                     {
-                        task.RunningTime += new TimeSpan(0, 0, 5);
-                        if (task.RunningTime > task.TargetTime)
+                        bool isForegroundWindow=false;
+                        //Check handle.
+                        foreach (Process process in processes)
                         {
-                            task.RunningTime = new TimeSpan(0, 0, 0);
-                            Program.apiHelper.ScoreHabitAsync(task.id);
+                            if(GetForegroundWindow()==process.MainWindowHandle)
+                            {
+                                isForegroundWindow = true;
+                            }
+                        }
+                        //Add time.
+                        if (isForegroundWindow)
+                        {
+                            task.RunningTime += new TimeSpan(0, 0, 5);
+                            if (task.RunningTime > task.TargetTime)
+                            {
+                                task.RunningTime = new TimeSpan(0, 0, 0);
+                                Program.apiHelper.ScoreHabitAsync(task.id);
+                            }
                         }
                     }
                 }
