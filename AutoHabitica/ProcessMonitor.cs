@@ -10,18 +10,20 @@ namespace AutoHabitica
 {
     internal static class ProcessMonitor
     {
+        public static FloatDisplayWindow displayWindow = new();
         /// <summary>
         /// Get the foreground window. From User32.dll.
         /// </summary>
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
         /// <summary>
-        /// Called every 5 seconds.
+        /// Called every 5 seconds. 
         /// </summary>
         /// <param name="tasks"></param>
         public static void Check(Task[]? tasks)
         {
             if(tasks==null) return;
+            bool isIdle=true;
             foreach (Task task in tasks)
             {
                 if (task.Enabled)
@@ -47,9 +49,17 @@ namespace AutoHabitica
                                 task.RunningTime = new TimeSpan(0, 0, 0);
                                 Program.apiHelper.ScoreHabitAsync(task.id);
                             }
+                            displayWindow.UpdateDisplay(
+                                task.text,task.RunningTime,task.TargetTime);
+                            isIdle = false;
                         }
                     }
                 }
+            }
+            if (isIdle)
+            {
+                displayWindow.UpdateDisplay("Not doing anything!",
+                    new(0, 0, 0), new(0, 0, 1));//To make the progress bar 0%
             }
         }
     }

@@ -45,6 +45,7 @@ namespace AutoHabitica
             processTimer.Start();
             //Refresh Form
             RefreshForm();
+            ProcessMonitor.displayWindow.Show();
         }
         /// <summary>
         /// Save data and close form when the user log out.
@@ -158,7 +159,8 @@ namespace AutoHabitica
 
         private void AddBootButton_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe",Environment.CurrentDirectory + "\\BootHelper.exe");
+            Process.Start("explorer.exe", Environment.CurrentDirectory + "\\BootHelper.exe");
         }
+
     }
 }
