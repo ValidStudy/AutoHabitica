@@ -107,11 +107,11 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(464, 193);
+            label3.Location = new Point(407, 196);
             label3.Name = "label3";
-            label3.Size = new Size(112, 17);
+            label3.Size = new Size(164, 17);
             label3.TabIndex = 7;
-            label3.Text = "And using y app...";
+            label3.Text = "And using app with y title...";
             // 
             // label4
             // 

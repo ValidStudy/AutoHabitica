@@ -16,13 +16,13 @@
         public bool completed { get; set; }
         public TimeSpan RunningTime { get; set; }
         public TimeSpan TargetTime { get; set; }
-        public string? ProcessName { get; set;}
+        public string? TitleName { get; set;}
         public bool Enabled {  get; set; }
         public override string ToString()
         {
             return text+" Running for "+Math.Round(RunningTime.TotalMinutes,2)+
                 "min. Target "+TargetTime.TotalMinutes+
-                "min."+" Related process "+ProcessName;
+                "min."+" Related process "+TitleName;
         }
     }
 }

@@ -82,6 +82,7 @@ namespace AutoHabitica
         private void RefreshForm()
         {
             tasksListBox.Items.Clear();
+            if(tasks!=null)
             foreach (var task in tasks)
             {
                 tasksListBox.Items.Add(task, task.Enabled);
@@ -123,7 +124,7 @@ namespace AutoHabitica
         {
             if (tasksListBox.SelectedIndex >= 0)
             {
-                tasks[tasksListBox.SelectedIndex].ProcessName = appTextBox.Text;
+                tasks[tasksListBox.SelectedIndex].TitleName = appTextBox.Text;
                 tasks[tasksListBox.SelectedIndex].TargetTime =
                     new TimeSpan(0, (int)timeNumericUpDown.Value, 0);
             }
