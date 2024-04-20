@@ -41,11 +41,11 @@ namespace AutoHabitica
             if(currentProcess!=null)
             {
                 var enabled=from Task in list 
-                            where Task.Enabled=true 
+                            where Task.Enabled==true 
                             select Task;
                 foreach(var task in enabled)
                 {
-                    if(task.TitleName!=null)
+                    if(!string.IsNullOrEmpty(task.TitleName))
                     if (currentProcess.MainWindowTitle.Contains(task.TitleName)){
                         task.RunningTime += new TimeSpan(0, 0, 5);
                         if (task.RunningTime > task.TargetTime)
