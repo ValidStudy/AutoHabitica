@@ -45,6 +45,7 @@
             processTimer = new System.Windows.Forms.Timer(components);
             refreshButton = new Button();
             addBootButton = new Button();
+            toggleDisplayToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)timeNumericUpDown).BeginInit();
             iconContextMenuStrip.SuspendLayout();
             SuspendLayout();
@@ -142,14 +143,14 @@
             // 
             // iconContextMenuStrip
             // 
-            iconContextMenuStrip.Items.AddRange(new ToolStripItem[] { exitToolStripMenuItem });
+            iconContextMenuStrip.Items.AddRange(new ToolStripItem[] { exitToolStripMenuItem, toggleDisplayToolStripMenuItem });
             iconContextMenuStrip.Name = "contextMenuStrip1";
-            iconContextMenuStrip.Size = new Size(97, 26);
+            iconContextMenuStrip.Size = new Size(181, 70);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(96, 22);
+            exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
@@ -177,6 +178,13 @@
             addBootButton.Text = "Boot when login";
             addBootButton.UseVisualStyleBackColor = true;
             addBootButton.Click += AddBootButton_Click;
+            // 
+            // toggleDisplayToolStripMenuItem
+            // 
+            toggleDisplayToolStripMenuItem.Name = "toggleDisplayToolStripMenuItem";
+            toggleDisplayToolStripMenuItem.Size = new Size(180, 22);
+            toggleDisplayToolStripMenuItem.Text = "Toggle Display";
+            toggleDisplayToolStripMenuItem.Click += ToggleDisplayToolStripMenuItem_Click;
             // 
             // MainWindow
             // 
@@ -226,5 +234,6 @@
         private System.Windows.Forms.Timer processTimer;
         private Button refreshButton;
         private Button addBootButton;
+        private ToolStripMenuItem toggleDisplayToolStripMenuItem;
     }
 }

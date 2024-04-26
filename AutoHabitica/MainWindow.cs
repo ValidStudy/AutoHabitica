@@ -82,11 +82,11 @@ namespace AutoHabitica
         private void RefreshForm()
         {
             tasksListBox.Items.Clear();
-            if(tasks!=null)
-            foreach (var task in tasks)
-            {
-                tasksListBox.Items.Add(task, task.Enabled);
-            }
+            if (tasks != null)
+                foreach (var task in tasks)
+                {
+                    tasksListBox.Items.Add(task, task.Enabled);
+                }
         }
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -163,5 +163,16 @@ namespace AutoHabitica
             Process.Start("explorer.exe", Environment.CurrentDirectory + "\\BootHelper.exe");
         }
 
+        private void ToggleDisplayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ProcessMonitor.displayWindow.Visible)
+            {
+                ProcessMonitor.displayWindow.Hide();
+            }
+            else
+            {
+                ProcessMonitor.displayWindow.Show();
+            }
+        }
     }
 }

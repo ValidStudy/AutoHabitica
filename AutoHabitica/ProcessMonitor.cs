@@ -22,13 +22,13 @@ namespace AutoHabitica
         /// <param name="tasks"></param>
         public static void Check(Task[]? tasks)
         {
-            if(tasks==null) return;
+            if (tasks == null) return;
             bool isIdle = true;
             //Get foreground process
             Process[] processes = Process.GetProcesses();
             IntPtr intPtr = GetForegroundWindow();
-            Process? currentProcess=null;
-            foreach(Process process in processes)
+            Process? currentProcess = null;
+            foreach (Process process in processes)
             {
                 if (process.MainWindowHandle == intPtr)
                 {
@@ -38,25 +38,31 @@ namespace AutoHabitica
             }
             //Check title
             List<Task> list = tasks.ToList();
-            if(currentProcess!=null)
+            if (currentProcess != null)
             {
-                var enabled=from Task in list 
-                            where Task.Enabled==true 
-                            select Task;
-                foreach(var task in enabled)
+                var enabled = from Task in list
+                              where Task.Enabled == true
+                              select Task;
+                foreach (var task in enabled)
                 {
-                    if(!string.IsNullOrEmpty(task.TitleName))
-                    if (currentProcess.MainWindowTitle.Contains(task.TitleName)){
-                        task.RunningTime += new TimeSpan(0, 0, 5);
-                        if (task.RunningTime > task.TargetTime)
+                    if (!string.IsNullOrEmpty(task.TitleName))
+                        if (currentProcess.MainWindowTitle.Contains(task.TitleName))
                         {
-                            task.RunningTime = new TimeSpan(0, 0, 0);
-                            Program.apiHelper.ScoreHabitAsync(task.id);
+                            task.RunningTime += new TimeSpan(0, 0, 5);
+                            if (task.RunningTime > task.TargetTime)
+                            {
+                                task.RunningTime = new TimeSpan(0, 0, 0);
+                                Program.apiHelper.ScoreHabitAsync(task.id);
+                                displayWindow.UpdateDisplay(
+                                    "Completed " + task.text, task.RunningTime, task.TargetTime);
+                            }
+                            else
+                            {
+                                displayWindow.UpdateDisplay(
+                                    task.text, task.RunningTime, task.TargetTime);
+                            }
+                            isIdle = false;
                         }
-                        displayWindow.UpdateDisplay(
-                            task.text, task.RunningTime, task.TargetTime);
-                        isIdle = false;
-                    }
                 }
             }
 
